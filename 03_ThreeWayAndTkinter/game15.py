@@ -1,15 +1,18 @@
 import tkinter as tk
 
-class Application(tk.Frame):
+class Application(tk.Tk):
     def __init__(self, master=None):
-        tk.Frame.__init__(self, master)
-        self.grid()
+        super().__init__(master)
         self.CreateWidgets()
 
     def CreateWidgets(self):
         self.quit_button = tk.Button(self, text='Quit', command=self.quit)
-        self.quit_button.grid()
+        self.quit_button.grid(column = 3, row = 5, columnspan = 2)
+    
+    def NewGame(self):
+        pass
 
 app = Application()
-app.master.title('15 game')
+app.title('Play 15')
+app.geometry("480x360")
 app.mainloop()
