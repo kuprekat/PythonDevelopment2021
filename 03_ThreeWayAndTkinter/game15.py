@@ -4,11 +4,27 @@ from tkinter import messagebox
 
 
 nums_ok = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]
+new_seq = [3, 7, 11, 14, 2, 6, 10, 13, 1, 5, 9, 12, 0, 4, 8]
 
 def generate_numbers():
     seq_1_to_15 = list(range(1, 16))
     random.shuffle(seq_1_to_15)
     print(seq_1_to_15)
+    sum = 0
+    for n in range(15):
+        for nn in range(n, 15):
+            if seq_1_to_15[n] > seq_1_to_15[nn]:
+                sum += 1
+        print(sum)
+    if sum % 2 != 0:
+        seq_1_to_15 = list(seq_1_to_15[i] for i in new_seq)
+        print(seq_1_to_15)
+        sum = 0
+        for n in range(15):
+            for nn in range(n, 15):
+                if seq_1_to_15[n] > seq_1_to_15[nn]:
+                    sum += 1
+        print(sum)
     return seq_1_to_15
 
 
@@ -38,7 +54,7 @@ class Application(tk.Tk):
                 if i == 3 and j == 3:
                     self.squares[i][j].grid_forget()
                     break
-                self.squares[i][j].config(text = numbers[i * 4 + j], command = self.Move(i, j))
+                self.squares[i][j].config(text = numbers[j * 4 + i], command = self.Move(i, j))
                 self.squares[i][j].grid(column = i, row = j + 1, sticky = "NEWS")
         print(self.squares[1][1]["text"])
 
