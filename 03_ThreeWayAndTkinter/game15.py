@@ -1,5 +1,9 @@
 import tkinter as tk
 import random
+from tkinter import messagebox
+
+
+nums_ok = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]
 
 def generate_numbers():
     seq_1_to_15 = list(range(1, 16))
@@ -49,6 +53,7 @@ class Application(tk.Tk):
                     print("CAN MOVE")
                     num = self.squares[i][j]["text"]
                     self.squares[i][j].grid_forget()
+                    self.squares[i][j]["text"] = 0
                     self.squares[empty_col][empty_row].grid(column = i, row = j + diff + 1, sticky = "NEWS")
                     self.squares[empty_col][empty_row].config(text = num, command = self.Move(empty_col, empty_row))
                     self.empty_cell = (i, j)
@@ -58,11 +63,25 @@ class Application(tk.Tk):
                     print("CAN MOVE")
                     num = self.squares[i][j]["text"]
                     self.squares[i][j].grid_forget()
+                    self.squares[i][j]["text"] = 0
                     self.squares[empty_col][empty_row].grid(column = i + diff, row = j + 1, sticky = "NEWS")
                     self.squares[empty_col][empty_row].config(text = num, command = self.Move(empty_col, empty_row))
                     self.empty_cell = (i, j)
+            if self.GameOver():
+                messagebox.showinfo(message = "Congratulations! You win!")
+                self.NewGame()
         return process_shift
 
+    def GameOver(self):
+        nums = []
+        for i in range(0, 4):
+            for j in range(0, 4):
+                nums.append(self.squares[j][i]["text"])
+        print(nums)
+        if nums == nums_ok:
+            return True
+        else:
+            return False
 
         
 
