@@ -9,22 +9,13 @@ new_seq = [3, 7, 11, 14, 2, 6, 10, 13, 1, 5, 9, 12, 0, 4, 8]
 def generate_numbers():
     seq_1_to_15 = list(range(1, 16))
     random.shuffle(seq_1_to_15)
-    print(seq_1_to_15)
     sum = 0
     for n in range(15):
         for nn in range(n, 15):
             if seq_1_to_15[n] > seq_1_to_15[nn]:
                 sum += 1
-        print(sum)
     if sum % 2 != 0:
         seq_1_to_15 = list(seq_1_to_15[i] for i in new_seq)
-        print(seq_1_to_15)
-        sum = 0
-        for n in range(15):
-            for nn in range(n, 15):
-                if seq_1_to_15[n] > seq_1_to_15[nn]:
-                    sum += 1
-        print(sum)
     return seq_1_to_15
 
 
@@ -40,7 +31,9 @@ class Application(tk.Tk):
             self.columnconfigure(i, weight=1)
         self.newgame_button = tk.Button(self, text='New Game', command=self.NewGame)
         self.newgame_button.grid(column = 0, row = 0, columnspan = 4, sticky = "NEW")
+        # self.newgame_button.config(bg = "DarkOliveGreen2", activebackground='DarkOliveGreen1')
         self.quit_button = tk.Button(self, text='Quit', command=self.quit)
+        # self.quit_button.config(bg = "LightGoldenrod3", activebackground='LightGoldenrod2')
         self.quit_button.grid(column = 3, row = 5, columnspan = 2)
 
         self.squares = [[tk.Button(self) for j in range(4)] for i in range(4)]
@@ -56,17 +49,15 @@ class Application(tk.Tk):
                     break
                 self.squares[i][j].config(text = numbers[j * 4 + i], command = self.Move(i, j))
                 self.squares[i][j].grid(column = i, row = j + 1, sticky = "NEWS")
-        print(self.squares[1][1]["text"])
+
 
     def Move(self, i, j):
         def process_shift():
-            print("MOVING", i, j)
             empty_col = self.empty_cell[0]
             empty_row = self.empty_cell[1]
             if i == empty_col:
                 diff = empty_row - j 
                 if abs(diff) == 1:
-                    print("CAN MOVE")
                     num = self.squares[i][j]["text"]
                     self.squares[i][j].grid_forget()
                     self.squares[i][j]["text"] = 0
@@ -76,7 +67,6 @@ class Application(tk.Tk):
             if j == empty_row:
                 diff = empty_col - i
                 if abs(diff) == 1:
-                    print("CAN MOVE")
                     num = self.squares[i][j]["text"]
                     self.squares[i][j].grid_forget()
                     self.squares[i][j]["text"] = 0
@@ -93,7 +83,6 @@ class Application(tk.Tk):
         for i in range(0, 4):
             for j in range(0, 4):
                 nums.append(self.squares[j][i]["text"])
-        print(nums)
         if nums == nums_ok:
             return True
         else:
@@ -104,5 +93,5 @@ class Application(tk.Tk):
 app = Application()
 app.title('Play 15')
 app.geometry("480x360")
-app.configure(background='orange')
+# app.configure(background="khaki")
 app.mainloop()
