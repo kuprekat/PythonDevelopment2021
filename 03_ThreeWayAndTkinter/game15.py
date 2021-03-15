@@ -31,9 +31,9 @@ class Application(tk.Tk):
             self.columnconfigure(i, weight=1)
         self.newgame_button = tk.Button(self, text='New Game', command=self.NewGame)
         self.newgame_button.grid(column = 0, row = 0, columnspan = 4, sticky = "NEW")
-        # self.newgame_button.config(bg = "DarkOliveGreen2", activebackground='DarkOliveGreen1')
+        self.newgame_button.config(bg = "DarkOliveGreen2", activebackground='DarkOliveGreen1')
         self.quit_button = tk.Button(self, text='Quit', command=self.quit)
-        # self.quit_button.config(bg = "LightGoldenrod3", activebackground='LightGoldenrod2')
+        self.quit_button.config(bg = "LightGoldenrod3", activebackground='LightGoldenrod2')
         self.quit_button.grid(column = 3, row = 5, columnspan = 2)
 
         self.squares = [[tk.Button(self) for j in range(4)] for i in range(4)]
@@ -93,5 +93,5 @@ class Application(tk.Tk):
 app = Application()
 app.title('Play 15')
 app.geometry("480x360")
-# app.configure(background="khaki")
+app.configure(background="khaki")
 app.mainloop()
