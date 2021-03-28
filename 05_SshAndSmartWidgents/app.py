@@ -21,11 +21,31 @@ class Application(tk.Frame):
     def create_widgets(self):
         '''Create all the widgets'''
 
-    def bind_widgets(self):
-        '''Bind events to the widgets'''
 
 class App(Application):
-    pass
+    def create_widgets(self):
+        self.frame1 = tk.LabelFrame(self)
+        self.frame1.grid(row=1, column=0, sticky="NEWS")
+        self.drawing = tk.LabelFrame(self, text='Editor', font="fixed")
+        self.drawing.grid(row = 0, column = 0, sticky="NEWS")
+        self.drawing.columnconfigure(0, weight=1)
+        self.drawing.columnconfigure(1, weight=1)
+        self.drawing.rowconfigure(0, weight=1)
+
+        self.quit_button = tk.Button(self.frame1, text="Quit", font="fixed",
+                           command=self.master.quit)
+        self.quit_button.grid(row = 0, column = 1, sticky = "E")
+        self.load_button = tk.Button(self.frame1, text="Load changes", font="fixed",
+                             command=self.upload)
+        self.load_button.grid(row=0,column=0, sticky = "WE")
+
+        self.txt = tk.Text(self.drawing, undo=True, wrap=tk.WORD, font="fixed", inactiveselectbackground="blue", takefocus=False, width=20)
+        self.txt.grid(row=0, column=1, sticky = "NEWS")
+        self.canv = tk.Canvas(self.drawing, bg='peach puff', width="5c")
+        self.canv.grid(row=0, column=0, sticky = "NEWS")
+
+    def upload():
+        pass
 
 
 app = App(title="Editor")
